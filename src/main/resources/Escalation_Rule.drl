@@ -1,0 +1,28 @@
+import drools.model.Case;
+import drools.model.Employee;
+import drools.model.Location;
+import java.util.*;
+
+global drools.model.Case myCase;
+dialect  "mvel"
+
+rule "Escalate case - Scenario 1"
+    when
+        employee:Employee(title == "Manager") and location:Location(buildingName == "SJC31") and case:Case(noOfDays >= 10)
+    then
+       	myCase.setCanBeEscalated(true);
+end
+
+rule "Escalate case - Scenario 2"
+    when
+        employee:Employee(title == "SDE") and location:Location(buildingName == "SJC310") and case:Case(noOfDays >= 20)
+    then
+       	myCase.setCanBeEscalated(true);
+end
+
+rule "Escalate case - Scenario 3"
+    when
+        employee:Employee(title == "SDE2") and location:Location(buildingName == "SJC310") and case:Case(noOfDays >= 20)
+    then
+       	myCase.setCanBeEscalated(true);
+end
